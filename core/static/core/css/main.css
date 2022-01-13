@@ -1,0 +1,345 @@
+:root {
+  --white: rgb(252, 252, 252);
+  --background-gray: #16151a;
+  --nav-gray: #262626;
+  --light-green: #25a56a;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--white);
+}
+body .main-page {
+  background-color: var(--background-gray);
+  padding-bottom: 10px;
+  min-height: 100vh;
+  width: 100%;
+}
+nav {
+  background-color: var(--nav-gray);
+  color: var(--white);
+}
+nav .nav-color {
+  color: var(--light-green);
+}
+nav .nav-color:hover {
+  color: var(--white);
+}
+nav .nav-link-color {
+  color: var(--white);
+}
+main {
+  margin-left: 3vw;
+  margin-right: 3vw;
+}
+.hero-image {
+  margin: 4vh 0;
+  height: 60vh;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
+.hero-text {
+  position: absolute;
+  color: var(--white);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 20px;
+}
+.hero-text h3 {
+  font-weight: bolder;
+  font-size: 3em;
+}
+.hero-text p {
+  font-size: 1.5em;
+}
+
+.popular-songs-section {
+  margin: 40px 0 50px 0;
+}
+.popular-songs-section h4 {
+  font-weight: bolder;
+}
+.songs-list-container{
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+}
+.songs-list {
+  display: inline-flex;
+  margin-top: 40px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.songs-list .card-display {
+  height: 285px;
+  width: 200px;
+  margin: 15px;
+}
+.card-display .artist-image {
+  width: inherit;
+  height: 200px;
+  background-color: white;
+}
+.card-display .artist-image img {
+  width: 200px;
+  height: 200px;
+}
+.card-display p {
+  padding: 10px;
+  overflow-y: hidden;
+}
+footer {
+  background: var(--nav-gray);
+}
+
+/*------Profile css ------------*/
+
+.main-profile-section{
+    display: flex;
+}
+.side-nav {
+  z-index: 11;
+  display: flex;
+  position: sticky;
+  top: 9vh;
+  height: 100%;
+}
+.profile-sidebar{
+  display: inline-block;
+  min-height: 91vh;
+  width: 25.33%;
+  min-width: 200px;
+}
+.user-summary {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  margin: 20px 0 20px 3vw;
+}
+.user-summary img {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 50%;
+}
+.user-summary .profile-name {
+  font-size: 1.3em;
+  margin-bottom: 2px;
+}
+.user-summary .profile-username {
+  font-size: 0.8em;
+}
+.nav-links{
+  position: relative;
+  display: block;
+}
+.nav-links ul {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: 0 0 0 0;
+  transform: translateY(-50%);
+}
+
+.nav-links ul li {
+  display: flex;
+  justify-content: left;
+  align-content: center;
+  width: 150px;
+  padding: 7px;
+  list-style: none;
+  margin: 10px 0 0 2vw;
+  border-radius: 5px;
+  transition: ease-in-out 0.2s;
+}
+.nav-links ul li span {
+  margin-right: 5px;
+}
+.nav-links ul li a {
+  text-decoration: none;
+  font-size: 20px;
+  color: var(--white);
+  transition: ease-in-out 0.2s;
+}
+.nav-links ul li a:hover {
+  color: var(--light-green);
+}
+.main-section {
+  position: relative;
+  display: block;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  border-left: 1px solid var(--nav-gray);
+}
+.profile-main .hero-image{
+  height: 40vh ;
+}
+
+blockquote {
+	font-weight: 600;
+	font-size: 2rem;
+	max-width: 600px;
+	line-height: 1.3;
+	position: relative;
+	margin: 0;
+	padding: .5rem .5rem .5rem 5rem;
+}
+
+blockquote:before,
+blockquote:after {
+	position: absolute;
+	color: #f1efe6;
+	font-size: 8rem;
+	width: 4rem;
+	height: 4rem;
+}
+blockquote:before {
+	content: '“';
+	left: 0;
+	top: -4rem;
+}
+blockquote:after {
+	content: '”';
+	right: -5rem;
+	bottom: 1rem;
+}
+cite {
+	line-height: 3;
+	text-align: left;
+  margin-left: 5rem;
+}
+.songs-section{
+  display: flex;
+}
+.songs-section .listening-history,.songs-section .recommended-songs,.songs-section .similar_songs{
+  flex: 1;
+  flex-direction: column;
+  margin: 5px;
+}
+.songs-section .listening-history .section,
+.songs-section .recommended-songs .section,
+.songs-section .similar_songs .section{
+  max-height: 120vh;
+  overflow: scroll;
+}
+.recommended-songs h4,
+.listening-history h4,
+.similar_songs h4{
+  font-size: 1.7rem;
+  margin-bottom: 20px;
+}
+.songs-section .song-display{
+  display: flex;
+  align-items: center;
+  width: 90%;
+
+  padding: 10px 0;
+  border-bottom: 1px solid var(--nav-gray);
+}
+.songs-section .artist-image{
+  height: 70px;
+  border-radius: 10px;
+  width: 70px;
+  margin-right: 10px;
+}
+.songs-section .artist-image img{
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+}
+.songs-section .song-display p{
+  font-size: 1.2rem;
+  }
+
+
+/*-------------Search page --------------*/
+.search-section{
+  width: 100%;
+  position: relative;
+}
+.search-form{
+  width: 60%;
+  margin: auto;
+  position: relative;
+  z-index: 1000;
+}
+.search__container {
+  padding: 50px 10px;
+    z-index: 1000;
+
+}
+.search__title {
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  color: var(--light-green);
+}
+.search-display .hero-image{
+  position: relative;
+}
+.search__input {
+  width: 100%;
+  padding: 12px 24px;
+  background-color: var(--nav-gray);
+  transition: transform 250ms ease-in-out;
+  font-size: 14px;
+  line-height: 18px;
+  color: white;
+  background-size: 18px 18px;
+  background-position: 95% center;
+  border-radius: 50px;
+  border: 1px solid #575756;
+  transition: all 250ms ease-in-out;
+}
+.search::placeholder {
+  color: #575756;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.search:hover,
+.search:focus {
+  padding: 12px 0;
+  outline: 0;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #575756;
+  border-radius: 0;
+  background-position: 100% center;
+}
+.search-display .hero-image::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 120px 100px 250px #000000, inset -120px -100px 250px #000000;
+}
+.similar-songs{
+  width: 100%;
+  padding: 0px 30px;
+}
+.similar-songs .section{
+  width: 100%;
+}
+.similar-songs .section .song-display{
+  width: 100%;
+}

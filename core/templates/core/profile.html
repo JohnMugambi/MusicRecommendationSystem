@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Music Recommendations
+{% endblock title %}
+{% block content %}
+    <main class="profile-main">
+        <div class="main-profile-section">
+            <div class="side nav profile-sidebar">
+                <div class="user-summary">
+                <img src="{% static 'core/img/profile1.jpeg' %}" alt="profile-picture">
+                <div>
+                    <p class="profile-name">Aya Nakamura</p>
+                    <p class="profile-username">@Ayanakamura</p>
+                </div>
+            </div>
+                <div class="nav-links">
+                <ul>
+                    <li>
+                                <span class="material-icons-outlined">
+                                    explore
+                                </span>
+                                <a href="{% url 'home' %}">Home</a>
+                            </li>
+                    <li>
+                                <span class="material-icons">
+                                    person_outline
+                                </span>
+                                <a href="{% url 'profile' %}">Profile</a>
+                            </li>
+                    <li>
+                                <span class="material-icons">
+                                    search
+                                </span>
+                                <a href="{% url 'search' %}">Search</a>
+                            </li>
+                </ul>
+                    </div>
+            </div>
+            <div class="main-section">
+                <div class="hero-image"
+                style="background-image: url('{% static "core/img/slide2.jpg" %}');width: 100%; background-repeat: no-repeat; background-size: cover;background-position: center center;">
+                    <div class="hero-text">
+                        <blockquote>
+                            You are what you <br> listen to
+                        </blockquote>
+                        <cite>Aldous Huxley</cite>
+                    </div>
+                </div>
+                <div class="songs-section">
+                    <div class="listening-history">
+                        <h4>Listening History</h4>
+                        <div id="printed-songs-list-listening" class="section">
+                            {% for songs in listening_history %}
+                            <div class="song-display">
+                                <div class="artist-image">
+                                    <img src="{% static 'core/img/covers/1.webp' %}">
+                                </div>
+                                <p>{{ songs.number_0 }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="recommended-songs">
+                        <h4>Recommended songs</h4>
+                        <div id="printed-songs-list-recommended" class="section">
+                            {% for songs in recommended_songs %}
+                            <div  class="song-display">
+                                <div class="artist-image">
+                                    <img class="song-cover" src="{% static 'core/img/covers/2.webp' %}">
+                                </div>
+                                <p>{{ songs.song }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+        </div>
+    </main>
+    <script>
+    function dispImagesRec(){
+        let images_list_one = document.getElementById('printed-songs-list-recommended').getElementsByTagName('img')
+        for(let i =0; i<images_list_one.length; i++){
+            let x = Math.floor((Math.random() * 76) + 1)
+            images_list_one[i].src = '/static/core/img/covers/' + x + '.webp'
+        }
+        console.log(images_list_one.length)
+    }
+    function dispImagesListening(){
+        let images_list_two = document.getElementById('printed-songs-list-listening').getElementsByTagName('img')
+        for(let i =0; i<images_list_two.length; i++){
+            let x = Math.floor((Math.random() * 76) + 1)
+            images_list_two[i].src = '/static/core/img/covers/' + x + '.webp'
+        }
+        console.log(images_list_two.length)
+    }
+
+    dispImagesListening()
+    dispImagesRec()
+    </script>
+{% endblock content %}
+</html>

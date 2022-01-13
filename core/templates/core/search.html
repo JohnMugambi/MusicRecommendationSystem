@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Music Recommendations
+{% endblock title %}
+{% block content %}
+    <main>
+        <div class="search-section">
+            <div class="search-display">
+                <div class="hero-image"
+                 style="background-image: url('{% static "core/img/slide3.jpg" %}');height: auto;width: 100%; background-repeat: no-repeat; background-size: cover;background-position: center center;">
+                    <div class="search-form">
+                        <div class="search__container">
+                            <p class="search__title">
+                                Let us help you discover Similar Songs
+                            </p>
+                            <form method="GET">
+                                <input class="search__input" type="text" name="search_song" placeholder="Type song or artist name"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="songs-section">
+            <div class="similar-songs">
+                <h4>Similar Songs</h4>
+                <div id="printed-songs-list-similar" class="section">
+                    {% for song in similar_songs %}
+                        <div  class="song-display">
+                            <div class="artist-image">
+                                <img class="song-cover" src="{% static 'core/img/covers/2.webp' %}">
+                            </div>
+                            <p>{{ song }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+
+        </div>
+        </div>
+    </main>
+    <script>
+    function dispImagesSimilar(){
+        let images_list_three = document.getElementById('printed-songs-list-similar').getElementsByTagName('img')
+        for(let i =0; i<images_list_three.length; i++){
+            let x = Math.floor((Math.random() * 76) + 1)
+            images_list_three[i].src = '/static/core/img/covers/' + x + '.webp'
+        }
+    }
+    dispImagesSimilar()
+    </script>
+
+
+
+
+{% endblock content %}
+</html>

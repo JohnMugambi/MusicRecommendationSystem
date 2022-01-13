@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Music Recommendations
+{% endblock title %}
+{% block content %}
+
+    <main >
+            <div class="hero-image"
+                style="background-image: url('{% static "core/img/slide1.jpg" %}');width: 100%; background-repeat: no-repeat; background-size: cover;background-position: center center;">
+                <div class="hero-text">
+                    <h3>
+                        Best Music Recommendation <br> Engine
+                    </h3>
+                    <p>
+                        Discover new and amazing music and artists <br> based on your listening history
+                    </p>
+                </div>
+            </div>
+            <div class="popular-songs-section">
+                <h4>Top 10 Popular songs</h4>
+                <div class="songs-list-container">
+                    <div id="popular-songs" class="songs-list">
+                        {% for item in popular_songs %}
+                        <div class="card-display" style="text-overflow: ellipsis;overflow: hidden;">
+                            <div class="artist-image">
+                                <img src="{% static 'core/img/covers/1.webp' %}" alt="artist">
+                            </div>
+                            <p style=" ">{{ item.song }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </main>
+    <script>
+        function popularSongs(){
+            let images_list_three = document.getElementById('popular-songs').getElementsByTagName('img')
+            for(let i =0; i<images_list_three.length; i++){
+                let x = Math.floor((Math.random() * 76) + 1)
+                images_list_three[i].src = '/static/core/img/covers/' + x + '.webp'
+            }
+            console.log(images_list_three.length)
+        }
+        popularSongs()
+    </script>
+
+    <!--
+          <div style="margin: 3vh 5vw; padding: 10px; background-color: white; min-height: 20vh; border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px">
+            <h5>Top Music this week</h5>
+            <div style="margin: 5px; ">
+                for item in popular_songs %}
+                     if forloop.counter0|divisibleby:2 %}
+                        <div style="background-color: aliceblue;padding: 10px">
+                            <p style="margin: 0">{</p>
+                        </div>
+                     else %}
+                        <div style="background-color: white; padding: 10px">
+                            <p style="margin: 0"></p>
+                        </div>
+                     endif %}
+                endfor %}
+            </div>
+        </div>
+        -->
+{% endblock content %}
+</html>
