@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    Music Recommendations
+    Profile
 {% endblock title %}
 {% block content %}
     <main class="profile-main">
@@ -10,8 +10,8 @@
                 <div class="user-summary">
                 <img src="{% static 'core/img/profile1.jpeg' %}" alt="profile-picture">
                 <div>
-                    <p class="profile-name">Aya Nakamura</p>
-                    <p class="profile-username">@Ayanakamura</p>
+                    <p class="profile-name">{{ user.first_name }} {{ user.last_name }}</p>
+                    <p class="profile-username">{{ user.email }}</p>
                 </div>
             </div>
                 <div class="nav-links">

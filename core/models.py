@@ -2,7 +2,6 @@ from django.db import models
 
 
 # Create your models here.
-
 class ListeningHistory(models.Model):
     index = models.BigIntegerField(blank=True,  primary_key=True)
     number_0 = models.TextField(db_column='0', blank=True, null=True)
@@ -35,4 +34,45 @@ class RecommendedSongs(models.Model):
     class Meta:
         managed = False
         db_table = 'recommended_songs'
+
+
+class SongData(models.Model):
+    song_id = models.CharField(primary_key=True, max_length=100)
+    title = models.TextField()
+    release = models.TextField()
+    artist_name = models.TextField()
+    year = models.IntegerField()  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'tblsongslibrary'
+
+
+
+class Tbllisteninghistory(models.Model):
+    song_listened_id = models.AutoField(primary_key=True)
+    user_id = models.TextField()
+    song_id = models.TextField()
+    listen_count = models.IntegerField()
+    title = models.TextField()
+    release = models.TextField()
+    artist_name = models.TextField()
+    year = models.TextField()  # This field type is a guess.
+    song = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'tbllisteninghistory'
+
+
+class Tblsongslibrary(models.Model):
+    song_id = models.CharField(primary_key=True, max_length=100)
+    title = models.TextField()
+    release = models.TextField()
+    artist_name = models.TextField()
+    year = models.TextField()  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'tblsongslibrary'
 

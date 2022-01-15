@@ -33,16 +33,19 @@ def popularityengine():
     pr = Recommenders.popularity_recommender_py()
     pr.create(song_df, 'user_id', 'song')
     ###display the top 10 popular songs
-    top_ten_songs = pr.recommend(song_df['user_id'][5])
+    top_ten_songs = pr.recommend(song_df['user_id'][1])
     # top 10 songs based on popularity
     top_ten_songs.to_sql(con=engine, name="popular_songs", if_exists='replace', index=True)
 
 
-def recommendedsongsengine():
+def recommendedsongsengine(logged_in_user_id):
+    ###Get users index
+    logged_user = song_df[song_df['user_id'] == logged_in_user_id]
+    logged_user_index = logged_user.tail(1).index.item()
     ###Item Similarity recommendation engine
     ir = Recommenders.item_similarity_recommender_py()
     ir.create(song_df, 'user_id', 'song')
-    user_items = ir.get_user_items(song_df['user_id'][5])
+    user_items = ir.get_user_items(song_df['user_id'][logged_user_index])
     user_items_df = pd.DataFrame(user_items)
 
     #Display user songs history
@@ -50,7 +53,7 @@ def recommendedsongsengine():
     #    print(user_item)
 
     ###Give song recommendation for that user
-    ir1 = ir.recommend(song_df['user_id'][5])
+    ir1 = ir.recommend(song_df['user_id'][logged_user_index])
 
     #print(ir1.head())
     # user-listening history

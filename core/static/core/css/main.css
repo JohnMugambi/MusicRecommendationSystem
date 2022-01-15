@@ -19,6 +19,11 @@ body .main-page {
 nav {
   background-color: var(--nav-gray);
   color: var(--white);
+  height: 8vh;
+}
+nav .nav-main{
+  display: flex;
+
 }
 nav .nav-color {
   color: var(--light-green);
@@ -28,6 +33,12 @@ nav .nav-color:hover {
 }
 nav .nav-link-color {
   color: var(--white);
+}
+form .link-btn{
+  margin-right: 20px;
+  border-radius: 20px;
+  line-height: 2.5vh;
+  text-align: center;
 }
 main {
   margin-left: 3vw;
@@ -93,7 +104,7 @@ main {
   height: 200px;
 }
 .card-display p {
-  padding: 10px;
+  padding: 10px 10px 0 10px;
   overflow-y: hidden;
 }
 footer {
@@ -187,6 +198,33 @@ footer {
   padding: 0 20px;
   border-left: 1px solid var(--nav-gray);
 }
+.collection-form{
+  margin: 8vh auto;
+  padding: 20px;
+  width: 70vw;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.76) 0 3px 8px;
+}
+.collection-form legend{
+  padding-bottom: 5px;
+}
+.collection-form input{
+  background-color: transparent;
+  border-radius: 20px;
+  color: white;
+  border: 1px solid rgba(75, 75, 75, 0.98);
+}
+.collection-form input:focus{
+  background-color: transparent;
+  color: white;
+}
+.collection-form .form-text{
+  padding-left: 10px;
+}
+.collection-form .btn{
+  background-color: var(--light-green);
+  border-radius: 20px;
+}
 .profile-main .hero-image{
   height: 40vh ;
 }
@@ -240,7 +278,8 @@ cite {
 }
 .recommended-songs h4,
 .listening-history h4,
-.similar_songs h4{
+.similar_songs h4,
+.discover-songs h4{
   font-size: 1.7rem;
   margin-bottom: 20px;
 }
@@ -335,7 +374,7 @@ cite {
 }
 .similar-songs{
   width: 100%;
-  padding: 0px 30px;
+  padding: 20px 0px;
 }
 .similar-songs .section{
   width: 100%;

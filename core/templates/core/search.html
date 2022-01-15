@@ -22,32 +22,63 @@
                 </div>
             </div>
         </div>
-        <div class="songs-section">
-            <div class="similar-songs">
-                <h4>Similar Songs</h4>
-                <div id="printed-songs-list-similar" class="section">
-                    {% for song in similar_songs %}
-                        <div  class="song-display">
+        <div class="discover-songs">
+            <h4>Recent releases : </h4>
+            <div class="discover-section">
+                <div class="songs-list-container">
+                    <div id="discover-songs" style="width:100%; display: inline-flex; overflow-x: auto">
+                        {% for song in discover_songs %}
+                        <div class="card-display" style="display:flex;  margin-right: 20px; min-width:200px;text-overflow: ellipsis;overflow: hidden; display: block">
                             <div class="artist-image">
-                                <img class="song-cover" src="{% static 'core/img/covers/2.webp' %}">
+                                <img src="{% static 'core/img/covers/1.webp' %}" alt="artist">
                             </div>
-                            <p>{{ song }}</p>
+                            <p>{{ song.title }} - {{ song.artist_name }} </p>
+                            <p style="margin-bottom: 0; padding-top: 0;">Year : {{ song.year }}</p>
                         </div>
-                    {% endfor %}
+                       {% endfor %}
+                    </div>
                 </div>
+            </div>
+        </div>
+        {% if similar_songs  %}
+            <div class="songs-section">
+                <div class="similar-songs">
+                    <h4>Similar Songs</h4>
+                    <div id="printed-songs-list-similar" class="section">
+                        {% for song in similar_songs %}
+                            <div  class="song-display">
+                                <div class="artist-image">
+                                    <img class="song-cover" src="{% static 'core/img/covers/2.webp' %}">
+                                </div>
+                                <p>{{ song }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <script>
+                function dispImagesSimilar(){
+                    let images_list_three = document.getElementById('printed-songs-list-similar').getElementsByTagName('img')
+                    for(let i =0; i<images_list_three.length; i++){
+                        let x = Math.floor((Math.random() * 76) + 1)
+                        images_list_three[i].src = '/static/core/img/covers/' + x + '.webp'
+                    }
+                }
+                dispImagesSimilar()
+            </script>
+        {% endif %}
 
-        </div>
-        </div>
     </main>
     <script>
-    function dispImagesSimilar(){
-        let images_list_three = document.getElementById('printed-songs-list-similar').getElementsByTagName('img')
-        for(let i =0; i<images_list_three.length; i++){
+
+    function discoverSongs(){
+        let images_list_four = document.getElementById('discover-songs').getElementsByTagName('img')
+        for(let i =0; i<images_list_four.length; i++){
             let x = Math.floor((Math.random() * 76) + 1)
-            images_list_three[i].src = '/static/core/img/covers/' + x + '.webp'
+            images_list_four[i].src = '/static/core/img/covers/' + x + '.webp'
         }
     }
-    dispImagesSimilar()
+    discoverSongs()
     </script>
 
 
