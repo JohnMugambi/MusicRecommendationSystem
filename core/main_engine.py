@@ -19,7 +19,7 @@ song_df = pd.merge(song_df_1, song_df_2.drop_duplicates(['song_id']), on='song_i
 # creating new feature combining title and artist name
 song_df['song'] = song_df['title'] + '-' + song_df['artist_name']
 #Taking top 10k samples
-song_df = song_df.head(10000)
+song_df = song_df.head(1000)
 
 ###Cummulative sum of listen counts of the songs
 song_grouped = song_df.groupby(['song']).agg({'listen_count': 'count'}).reset_index()

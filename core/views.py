@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import RecommendedSongs, PopularSongs, ListeningHistory, SongData
 from .main_engine import popularityengine, recommendedsongsengine, searchsimilarsong
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, UserUpdateForm, ProfileImageUpdateForm
 
 
 def register(request):
@@ -51,3 +51,22 @@ def profile(request):
     listening_history = ListeningHistory.objects.all()
     return render(request, "core/profile.html", {'recommended_songs': recommended_songs,
                                                  'listening_history': listening_history})
+
+
+def update_profile(request):
+    if request.method == 'POST':
+        update_form = UserUpdateForm(request.POST, instance=request.user)
+        #image_form = ProfileImageUpdateForm(request.POST, request.FILES, instance=request.user.username)
+        if update_form.is_valid():
+            update_form.save()
+            #image_form.save()
+            messages.success(request, f'Your profile information has been updated!')
+            # Redirect to profile page
+            return redirect('profile')
+    else:
+        update_form = UserUpdateForm(instance=request.user)
+        #image_form = ProfileImageUpdateForm(instance=request.user.username)
+    context = {
+        'u_form': update_form
+    }
+    return render(request, "core/update_profile.html", context)

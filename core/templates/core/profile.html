@@ -8,10 +8,13 @@
         <div class="main-profile-section">
             <div class="side nav profile-sidebar">
                 <div class="user-summary">
-                <img src="{% static 'core/img/profile1.jpeg' %}" alt="profile-picture">
+                <img src="{{ user.userprofile.avatar.url }}" alt="profile-picture">
                 <div>
                     <p class="profile-name">{{ user.first_name }} {{ user.last_name }}</p>
                     <p class="profile-username">{{ user.email }}</p>
+                </div>
+                <div>
+                    <p><a href="{% url 'update_profile' %}">Edit profile</a></p>
                 </div>
             </div>
                 <div class="nav-links">

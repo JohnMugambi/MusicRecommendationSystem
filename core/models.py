@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 class ListeningHistory(models.Model):
@@ -48,7 +48,6 @@ class SongData(models.Model):
         db_table = 'tblsongslibrary'
 
 
-
 class Tbllisteninghistory(models.Model):
     song_listened_id = models.AutoField(primary_key=True)
     user_id = models.TextField()
@@ -76,3 +75,10 @@ class Tblsongslibrary(models.Model):
         managed = False
         db_table = 'tblsongslibrary'
 
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.DO_NOTHING)
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
+    def __str__(self):
+        return self.user.username

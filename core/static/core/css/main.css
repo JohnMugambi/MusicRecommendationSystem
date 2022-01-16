@@ -379,6 +379,10 @@ cite {
 .similar-songs .section{
   width: 100%;
 }
-.similar-songs .section .song-display{
+.similar-songs .section .song-display {
   width: 100%;
+}
+/*------Log out page-----------*/
+.logout{
+  padding-top: 5vh ;
 }
