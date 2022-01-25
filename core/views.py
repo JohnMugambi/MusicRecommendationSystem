@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .models import RecommendedSongs, PopularSongs, ListeningHistory, SongData
 from .main_engine import popularityengine, recommendedsongsengine, searchsimilarsong
 from .forms import UserRegistrationForm, UserUpdateForm, ProfileImageUpdateForm
-
+from background_task import background
 
 def register(request):
     if request.method == "POST":
@@ -23,7 +23,16 @@ def register(request):
 def home(request):
     popularityengine()
     popular_songs = PopularSongs.objects.all()
-    return render(request, "core/index.html", {'popular_songs': popular_songs})
+    if request.user.is_authenticated:
+        current_user = request.user
+        current_user = current_user.username
+        recommendedsongsengine(current_user)
+
+        print("User is authenticated")
+        return render(request, "core/index.html", {'popular_songs': popular_songs})
+    else:
+        print("User is not authenticated")
+        return render(request, "core/index.html", {'popular_songs': popular_songs})
 
 
 @login_required()
@@ -44,9 +53,6 @@ def search(request):
 
 @login_required()
 def profile(request):
-    current_user = request.user
-    current_user = current_user.username
-    recommendedsongsengine(current_user)
     recommended_songs = RecommendedSongs.objects.all()
     listening_history = ListeningHistory.objects.all()
     return render(request, "core/profile.html", {'recommended_songs': recommended_songs,

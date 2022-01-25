@@ -3,6 +3,9 @@ import pandas as pd
 from sqlalchemy import create_engine
 import os
 from django.conf import settings
+import mysql.connector
+from mysql.connector import Error
+
 
 
 ###Database Connection
@@ -10,16 +13,44 @@ engine = create_engine("mysql+mysqlconnector://root:mugambi@localhost/recommende
 
 
 #Loading datasets 'data/triplets_file.csv'
-song_df_1 = pd.read_csv(os.path.join(settings.DATA_FILES, 'triplets_file.csv'))
-song_df_2 = pd.read_csv(os.path.join(settings.DATA_FILES, 'song_data.csv'))
+#song_df_1 = pd.read_csv(os.path.join(settings.DATA_FILES, 'triplets_file.csv'))
+#song_df_2 = pd.read_csv(os.path.join(settings.DATA_FILES, 'song_data.csv'))
 #Combine both data
-song_df = pd.merge(song_df_1, song_df_2.drop_duplicates(['song_id']), on='song_id', how='left')
+#song_df = pd.merge(song_df_1, song_df_2.drop_duplicates(['song_id']), on='song_id', how='left')
 
 ###Data preprocessing
 # creating new feature combining title and artist name
-song_df['song'] = song_df['title'] + '-' + song_df['artist_name']
-#Taking top 10k samples
-song_df = song_df.head(1000)
+#song_df['song'] = song_df['title'] + '-' + song_df['artist_name']
+#Taking top 1k samples
+#song_df = song_df.head(1000)
+
+
+try:
+    connection = mysql.connector.connect(host='localhost',
+                                         database='recommender_db',
+                                         user='root',
+                                         password='mugambi')
+    if connection.is_connected():
+        db_Info = connection.get_server_info()
+        print("Connected to MySQL Server version ", db_Info)
+        cursor = connection.cursor()
+        cursor.execute("select database();")
+        record = cursor.fetchone()
+        print("You're connected to database: ", record)
+
+except Error as e:
+    print("Error while connecting to MySQL", e)
+finally:
+    if connection.is_connected():
+        song_df = pd.read_sql('''SELECT * FROM tbllisteninghistory''', connection)
+        song_grouped = song_df.groupby(['song']).agg({'listen_count': 'count'}).reset_index()
+        grouped_sum = song_grouped['listen_count'].sum()
+        song_grouped['percentage'] = song_grouped['listen_count'] / grouped_sum * 100
+        song_grouped.sort_values(['listen_count', 'song'], ascending=[0, 1])
+        #print(song_df)
+        cursor.close()
+        connection.close()
+        print("MySQL connection is closed")
 
 ###Cummulative sum of listen counts of the songs
 song_grouped = song_df.groupby(['song']).agg({'listen_count': 'count'}).reset_index()
